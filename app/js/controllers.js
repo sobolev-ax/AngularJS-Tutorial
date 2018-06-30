@@ -1,25 +1,15 @@
 var phonecatApp  = angular.module('phonecatApp', []);
 
-phonecatApp.controller('PhoneListCtrl', function($scope) {
+phonecatApp.controller('PhoneListCtrl', function($scope, $http) {
+    $http.get('phones/others/phones.json')
+        .success(function(data, status, headers, config){
+            console.log('This is data: ', data, '\n\n This is status: ', status, '\n\n This is headers: ', headers, '\n\n This is config: ', config);
+            $scope.phones = data;
+        }).error(function() {
+            
+        })
+    
     $scope.title = "Телефоны";
-    $scope.phones = [
-        {
-          name: 'Nexus S',
-          snippet: 'Fast just got faster with Nexus S.',
-          status: true,
-          priority: 1
-        }, {
-          name: 'Motorola XOOM™ with Wi-Fi',
-          snippet: 'The Next, Next Generation tablet.',
-          status: false,
-          priority: 2
-        }, {
-          name: 'MOTOROLA XOOM™',
-          snippet: 'The Next, Next Generation tablet.',
-          status: true,
-          priority: 3
-        }
-    ];
     $scope.today = new Date();
     $scope.doneAndFilter = function(phoneItem) {
         return phoneItem.name && phoneItem.priority > 1

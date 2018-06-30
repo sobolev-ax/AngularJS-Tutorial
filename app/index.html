@@ -12,14 +12,13 @@
     <h1>{{title}}</h1>
     <input type="text" data-ng-model="query" />
     <ul>
-      <li data-ng-repeat="phone in filterFun = ( phones | filter:doneAndFilter )">
+      <li data-ng-repeat="phone in phones | filter:query">
         <span>{{phone.name}}</span>
         <p>{{phone.snippet}}</p>
         <p>Status: {{phone.status}}</p>
-        <p>Priority: {{phone.priority}}</p>
       </li>
     </ul>
-    <p>Общее колличество телефонов: {{ filterFun.length }}</p>
+    <p>Общее колличество телефонов: {{ phones.length }}</p>
 
     <table>
       <thead>
@@ -40,12 +39,6 @@
             'glyphicon-chevron-up' : isSortUp('status'),
             'glyphicon-chevron-down' : isSortDown('status')}"></i>
           <button data-ng-click="sort('status')">Status:</button>
-        </th>
-        <th>
-          <i class="glyphicon" data-ng-class="{
-            'glyphicon-chevron-up' : isSortUp('priority'),
-            'glyphicon-chevron-down' : isSortDown('priority')}"></i>
-          <button data-ng-click="sort('priority')">Priority:</button>
         </th>
       </thead>
       <tbody>
