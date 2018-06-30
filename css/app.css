@@ -23,15 +23,15 @@ footer {
   margin-bottom: 16px;
   position: relative;
 }
-.preview-img img {
-  max-height: 200px;
-}
 .preview-img .label {
   position: absolute;
   top: 16px;
   right: 16px;
   z-index: 1;
   display: block;
+}
+.preview-img img {
+  max-height: 200px;
 }
 h2 {
   font-size: 24px;
@@ -85,4 +85,24 @@ h2 {
     top: 0;
     width: 50%; /* 6 columns */
   }
+}
+.phone-images {
+  text-align: center;
+}
+.phone-images img {
+  max-width: 100%;
+}
+
+.phone-thumbs li {
+  float: left;
+  width: 30%;
+  padding:16px;
+}
+.phone-thumbs li img {
+  max-width: 100%;
+}
+.specs li {
+  display: inline-block;
+  vertical-align: top;
+  width: 30%;
 }
