@@ -27,12 +27,15 @@ phonecatApp.config(['$routeProvider', '$locationProvider', function($routeProvid
 }]);
 
 phonecatApp.factory('Phone', [
-  $resource, function($resource) {
+  '$resource', function($resource) {
     return $resource('phones/:phoneId.:format', {
       phoneId: 'phones',
-      fromat: 'json',
+      format: 'json',
       apiKey: 'someKeyThis'
       /* http://localhost:8888/phones/phones.json?apiKey=someKeyThis */
+    }, {
+      /* action {method: <?>, params: <?>, isArray: <?>, ... } */
+      update: {method: 'PUT', params: {phoneId: '@phone', isArray: true}}
     })
   }
 ])
@@ -62,14 +65,14 @@ phonecatApp.controller('ContactCtrl',['$scope','$http', '$location', function($s
 
 }]);
 //Phone Detail Controller
-phonecatApp.controller('PhoneDetailCtrl',['$scope','$http', '$location', '$routeParams', function($scope, $http, $location, $routeParams) {
+phonecatApp.controller('PhoneDetailCtrl',['$scope','$http', '$location', '$routeParams', 'Phone', function($scope, $http, $location, $routeParams, Phone) {
   $scope.phoneId = $routeParams.phoneId;
   var url = 'phones/'+$routeParams.phoneId+'.json';
 
-  $http.get(url).success(function(data) {
+  Phone.get({phoneId: $routeParams.phoneId}, function(data) {
     $scope.phone = data;
     $scope.mainImageUrl = data.images[0];
-  });
+  })
 
   $scope.setImage = function(imageUrl) {
     $scope.mainImageUrl = imageUrl;
